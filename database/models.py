@@ -1,9 +1,8 @@
-from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, Float
-from sqlalchemy.engine.url import URL
+from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, Float, Date
 from sqlalchemy.orm import relationship
-
+from sqlalchemy import create_engine
+from sqlalchemy.engine.url import URL
 
 db_config = {
     'drivername':'mysql+pymysql',
@@ -23,7 +22,8 @@ class TeamGameLog(Base):
     season_type = Column(String(45))
     teamId = Column(String(10))
     gameId = Column(String(10))
-    game_date = Column(String(14))
+    game_date_text = Column(String(14))
+    game_date = Column(Date)
     matchup = Column(String(20))
     win_loss = Column(String(10))
     season_wins = Column(Integer)
@@ -48,7 +48,7 @@ class TeamGameLog(Base):
     turnovers = Column(Integer)
     personal_fouls = Column(Integer)
     points = Column(Integer) 
-
+    record_insert_date = Column(DateTime)
 
 engine = create_engine(URL(**db_config), echo=True)
 
