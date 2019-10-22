@@ -19,7 +19,7 @@ for team in team_keys:
     current_team = nba_api.teamgamelog(team,"2018-19","Regular Season")
     data_rowset = current_team["resultSets"][0]["rowSet"]
     data_params = current_team["parameters"]
-    for game in hawks_rowset:
+    for game in data_rowset:
         game.insert(0,data_params["SeasonType"])
         game.insert(0,data_params["Season"])
         new_game = database.TeamGameLog(
