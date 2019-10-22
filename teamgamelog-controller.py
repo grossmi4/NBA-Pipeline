@@ -1,7 +1,7 @@
 import nba_api
 import csv
 import json
-from database import database
+from database import models
 import sqlalchemy as db
 from datetime import datetime
 from dateutil.parser import parse
@@ -12,7 +12,7 @@ with open('assets/team_key.csv', mode='r') as team_key_csv:
     team_dict = {rows[0]:rows[1] for rows in reader}
 
 # Establlish session with Database
-DBSession = db.orm.sessionmaker(bind=database.engine)
+DBSession = db.orm.sessionmaker(bind=models.engine)
 session = DBSession()
 
 # Pulls 2018-19 Regular Season for each team
@@ -24,13 +24,13 @@ for team in team_keys:
     for game in data_rowset:
         game.insert(0,data_params["SeasonType"])
         game.insert(0,data_params["Season"])
-        new_game = database.TeamGameLog(
+        new_game = models.TeamGameLog(
             season = game[0],
             season_type = game[1],
             teamId = game[2],
             gameId = game[3],
             game_date_text = game[4],
-            game_date = parse(game[4]),
+            game_date = parse(game[4]), #parses text date into Date format
             matchup = game[5],
             win_loss = game[6],
             season_wins = game[7],
