@@ -3,11 +3,14 @@ import csv
 import json
 from database import database
 import pandas as pd
+import sqlalchemy as db
 
 # Creates dictionary of teams and their keys from csv file in assets
 with open('assets/team_key.csv', mode='r') as team_key_csv:
     reader = csv.reader(team_key_csv)
     team_dict = {rows[0]:rows[1] for rows in reader}
+
+# Establlish session with Database
 
 # Pulls 2018-19 Regular Season for each team
 hawks = nba_api.teamgamelog(team_dict["Atlanta Hawks"],"2018-19","Regular Season")
@@ -47,6 +50,11 @@ for game in hawks_rowset:
         personal_fouls = game[27]
         points = game[28]
     )
+    session.add(new_game)
+    session.commit()
 
-pd.read_csv    
 
+
+
+
+ 
