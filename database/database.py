@@ -1,6 +1,6 @@
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, Float
+from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, Float, Date
 from sqlalchemy.engine.url import URL
 from sqlalchemy.orm import relationship
 
@@ -23,7 +23,8 @@ class TeamGameLog(Base):
     season_type = Column(String(45))
     teamId = Column(String(10))
     gameId = Column(String(10))
-    game_date = Column(String(14))
+    game_date_text = Column(String(14))
+    game_date = Column(Date)
     matchup = Column(String(20))
     win_loss = Column(String(10))
     season_wins = Column(Integer)
