@@ -2,8 +2,7 @@ import nba_api
 import csv
 import json
 from database import database
-import pandas as pd
-import sqlalchemy as db
+from sqlalchemy.orm import sessiomaker
 
 # Creates dictionary of teams and their keys from csv file in assets
 with open('assets/team_key.csv', mode='r') as team_key_csv:
@@ -11,7 +10,7 @@ with open('assets/team_key.csv', mode='r') as team_key_csv:
     team_dict = {rows[0]:rows[1] for rows in reader}
 
 # Establlish session with Database
-DBSession = db.orm.sessionmaker(bind=database.engine)
+DBSession = sessionmaker(bind=database.engine)
 session = DBSession()
 
 # Pulls 2018-19 Regular Season for each team
