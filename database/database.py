@@ -49,6 +49,7 @@ class TeamGameLog(Base):
     turnovers = Column(Integer)
     personal_fouls = Column(Integer)
     points = Column(Integer) 
+    record_insert_date = Column(DateTime)
 
 
 engine = create_engine(URL(**db_config), echo=True)

@@ -3,7 +3,7 @@ import csv
 import json
 from database import database
 import sqlalchemy as db
-import datetime
+from datetime import datetime
 from dateutil.parser import parse
 
 # Creates dictionary of teams and their keys from csv file in assets
@@ -54,7 +54,8 @@ for team in team_keys:
             blocks = game[25],
             turnovers = game[26],
             personal_fouls = game[27],
-            points = game[28]
+            points = game[28],
+            record_insert_date = datetime.utcnow()
         )
         session.add(new_game)
         session.commit()
