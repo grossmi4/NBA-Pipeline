@@ -11,7 +11,7 @@ with open('assets/team_key.csv', mode='r') as team_key_csv:
     team_dict = {rows[0]:rows[1] for rows in reader}
 
 # Establlish session with Database
-DBSession = sessionmaker(bind=engine)
+DBSession = db.orm.sessionmaker(bind=database.engine)
 session = DBSession()
 
 # Pulls 2018-19 Regular Season for each team
