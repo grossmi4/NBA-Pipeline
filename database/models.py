@@ -3,15 +3,7 @@ from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, Float, Dat
 from sqlalchemy.orm import relationship
 from sqlalchemy import create_engine
 from sqlalchemy.engine.url import URL
-
-db_config = {
-    'drivername':'mysql+pymysql',
-    'host':'localhost',
-    'username':'admin',
-    'password':'thisisapassword',
-    'database':'NBA',
-    'port':3306
-}
+import config as cfg
 
 Base = declarative_base()
 
@@ -47,10 +39,10 @@ class TeamGameLog(Base):
     blocks = Column(Integer)
     turnovers = Column(Integer)
     personal_fouls = Column(Integer)
-    points = Column(Integer) 
+    points = Column(Integer)
     record_insert_date = Column(DateTime)
 
-engine = create_engine(URL(**db_config), echo=True)
+engine = create_engine(URL(**cfg.db_config), echo=True)
 
 if __name__ == '__main__':
     Base.metadata.create_all(engine)
