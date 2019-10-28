@@ -1,7 +1,7 @@
 import nba_api
 import csv
 import json
-from database import models
+from database import model_TeamGameLog as models
 import sqlalchemy as db
 from datetime import datetime
 from dateutil.parser import parse
@@ -11,7 +11,7 @@ with open('assets/team_key.csv', mode='r') as team_key_csv:
     reader = csv.reader(team_key_csv)
     team_dict = {rows[0]:rows[1] for rows in reader}
 
-# Establlish session with Database
+# Establish session with Database
 DBSession = db.orm.sessionmaker(bind=models.engine)
 session = DBSession()
 
@@ -59,9 +59,3 @@ for team in team_keys:
         )
         session.add(new_game)
         session.commit()
-
-
-
-
-
- 
