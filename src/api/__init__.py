@@ -1,2 +1,1 @@
-from api_boxscore import boxscoretraditionalv2
-from api_teamgamelog import teamgamelog
+from api import api_boxscore, api_teamgamelog
