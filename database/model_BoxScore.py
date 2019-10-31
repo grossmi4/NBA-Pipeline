@@ -3,7 +3,7 @@ from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, Float, Dat
 from sqlalchemy.orm import relationship
 from sqlalchemy import create_engine
 from sqlalchemy.engine.url import URL
-import config as cfg
+from .config import db_config
 
 Base = declarative_base()
 
@@ -39,7 +39,7 @@ class BoxScore(Base):
     points = Column(Integer)
     plus_minus = Column(Integer)
 
-engine = create_engine(URL(**cfg.db_config), echo=True)
+engine = create_engine(URL(**db_config), echo=True)
 
 if __name__ == '__main__':
     Base.metadata.create_all(engine)
