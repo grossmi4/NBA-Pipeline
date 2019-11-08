@@ -3,7 +3,7 @@ from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, Float, Dat
 from sqlalchemy.orm import relationship
 from sqlalchemy import create_engine
 from sqlalchemy.engine.url import URL
-from config import db_config, engine
+from .config import db_config, engine
 
 Base = declarative_base()
 

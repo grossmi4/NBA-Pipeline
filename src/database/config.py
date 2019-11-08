@@ -11,3 +11,4 @@ db_config = {
 }
 
 engine = create_engine(URL(**db_config), echo=True)
+DBSession = db.orm.sessionmaker(bind=teamgamelogmodel.engine)

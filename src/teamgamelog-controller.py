@@ -1,7 +1,8 @@
 import api
 import csv
 import json
-from database import model_TeamGameLog as models
+from database import model_TeamGameLog as teamgamelogmodel
+from database import model_Team as teammodel
 import sqlalchemy as db
 from datetime import datetime
 from dateutil.parser import parse
@@ -12,19 +13,18 @@ with open('assets/team_key.csv', mode='r') as team_key_csv:
     team_dict = {rows[0]:rows[1] for rows in reader}
 
 # Establish session with Database
-DBSession = db.orm.sessionmaker(bind=models.engine)
-session = DBSession()
+session = teamgamelogmodel.DBSession()
 
 # Pulls 2018-19 Regular Season for each team
 team_keys = team_dict.values()
 for team in team_keys:
-    current_team = api.teamgamelog(team,"2018-19","Regular Season")
+    current_team = api.api_teamgamelog.teamgamelog(team,"2018-19","Regular Season")
     data_rowset = current_team["resultSets"][0]["rowSet"]
     data_params = current_team["parameters"]
     for game in data_rowset:
         game.insert(0,data_params["SeasonType"])
         game.insert(0,data_params["Season"])
-        new_game = models.TeamGameLog(
+        new_game = teamgamelogmodel.TeamGameLog(
             season = game[0],
             season_type = game[1],
             teamId = game[2],
